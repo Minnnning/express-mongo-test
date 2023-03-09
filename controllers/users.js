@@ -2,34 +2,47 @@
 
 const User = require("../models/User"); //임시 데이터 저장소 연결
 
-module.exports.create = (req, res) => {
-  const { userID, password, info } = req.body;
-  User.push({ userID, password, info });
-  return res.send(User);
+module.exports.create = async (req, res) => {
+  try {
+    const { userID, password, info } = req.body;
+
+    const user = new User({ userID, password, info });
+
+    await user.save();
+
+    return res.send(User);
+  } catch (err) {
+    return res.status(500).send(err);
+  }
 };
 
-module.exports.find = (req, res) => {
-  const { userID } = req.params;
-  if (userID) {
-    for (let i = 0; i < User.lengthl; i++) {
-      if (User[i].userID == userID) {
-        return res.send(User[i]);
-      }
+module.exports.find = async (req, res) => {
+  try {
+    const { userID } = req.params;
+
+    if (userID) {
+      const user = await User.findOne({ userID });
+
+      if (!user) return res.status(404).send("user not found");
+      return res.send(user);
     }
-    return res.status(404).send("user not found");
+    const users = await User.find({}); //모든 유저 정보를 리턴
+    return res.send(users);
+  } catch (err) {
+    return res.status(500).send(err);
   }
-  return res.send(User);
 };
 
-module.exports.remove = (req, res) => {
-  const { userID } = req.params;
-  if (userID) {
-    for (let i = 0; i < User.length; i++) {
-      if (User[i].userID == req.params.userID) {
-        User.splice(i, 1);
-        return res.send(User);
-      }
-    }
+module.exports.remove = async (req, res) => {
+  try {
+    const { userID } = req.params;
+    const user = await User.findOne({ userID });
+
+    if (!user) return res.status(404).send("user not found");
+
+    await user.remove();
+    return res.send();
+  } catch (err) {
+    return res.status(500).send(err);
   }
-  return res.status(404).send("user not found");
 };
