@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+  <html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>list 페이지입니다.</h2>
+    <% for (var i =0; i < data.length; i++) { %>
+      <span>id: <%= data[i].userID %> &nbsp;</span>
+      <span>pw: <%= data[i].password %>&nbsp;</span>
+      <span>info: <%= data[i].info %></span>
+
+      <form action='<%= data[i].userID %>' method="post">
+        <input type="submit" name="_method" value="delete"/>     
+      </form>
+      
+           
+          
+      </br>
+    <% } %>
+  </body>
+</html>

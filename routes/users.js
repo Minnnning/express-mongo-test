@@ -2,15 +2,20 @@
 
 const express = require("express");
 const router = express.Router();
+
 const users = require("../controllers/users");
 
-//생성요청
-router.post("/", users.create);
+//입력양식을 보여준다
+router.get("/", users.input);
+
+//저장하는 컨트롤
+router.post("/add", users.create); //ok
 
 //read
-router.get("/:userID?", users.find);
+router.get("/list/:userID?", users.find); //ok
 
 //delete
-router.delete("/:userID", users.remove);
+router.delete("/:userID", users.remove); // 리스트뷰를 따로 생성해서 각각의 리스트 정보를 보여주고
+//삭제 버튼을 mothod=delete 설정한다
 
 module.exports = router;
