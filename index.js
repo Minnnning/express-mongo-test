@@ -2,10 +2,10 @@ const express = require("express");
 const app = express();
 const port = 8080;
 const mongoose = require("mongoose");
-const methodOverride = require("method-override"); // html에서 get과 post밖에 없어서 express api가 인식을 못함
-//delete를 인식 못해서 추가함
 
-app.use(methodOverride("_method"));
+const cors = require("cors");
+app.use(cors());
+
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views"); //ejs를 사용할 파일의 위치
 

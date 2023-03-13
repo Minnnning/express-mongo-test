@@ -13,8 +13,8 @@
       <span>pw: <%= data[i].password %>&nbsp;</span>
       <span>info: <%= data[i].info %></span>
 
-      <form action='<%= data[i].userID %>' method="post">
-        <input type="submit" name="_method" value="delete"/>     
+      <form action='<%= data[i].userID %>' method="get">
+        <input type="submit" value="delete"/>     
       </form>
       
            

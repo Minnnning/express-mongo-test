@@ -15,7 +15,7 @@ router.post("/add", users.create); //ok
 router.get("/list/:userID?", users.find); //ok
 
 //delete
-router.delete("/:userID", users.remove); // 리스트뷰를 따로 생성해서 각각의 리스트 정보를 보여주고
+router.get("/:userID", users.remove); // 리스트뷰를 따로 생성해서 각각의 리스트 정보를 보여주고
 //삭제 버튼을 mothod=delete 설정한다
 
 module.exports = router;
